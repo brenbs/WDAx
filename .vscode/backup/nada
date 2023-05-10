@@ -1,0 +1,85 @@
+<?php
+
+if(!empty($_GET['id'])){
+
+ include_once('config.php');
+
+ $id=$_GET['id'];
+
+ $sqlSelect="SELECT*FROM alugados WHERE id=$id";
+
+ $result=$conexao->query($sqlSelect);
+
+ if($result->num_rows>0)
+ {
+  while($user_data=mysqli_fetch_assoc($result))
+  {
+  $nomela=$user_data['nomela'];
+  $nomeua=$user_data['nomeua'];
+  $dataalug=$user_data['dataalug'];
+  $dataprev=$user_data['dataprev'];
+  $datadev=$user_data['datadev'];
+  }
+  
+ }
+ else{
+   header('Location:alug.php');
+ }
+  
+}else{
+  header('Location:alug.php');
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="estilos/usucad.css">
+ <title>Editar Aluguel</title>
+</head>
+<body>
+
+<a href='alug.php'><button>Voltar</button></a>
+
+<div class="box">
+  <form action="aluguelSaveEdit.php" method="POST">
+
+  <fieldset>
+  <legend><b>Editar Aluguel</b></legend>
+  <br>
+
+  <div class="inputBox">
+    <label for="nomela" class="labelInput">Nome do Livro:</label>
+    <input type="text" name="nomela" id="nomela" class="inputUser" value="<?php echo $nomela ?>" required>
+  </div>
+  <br><br>
+  <div class="inputBox">
+    <label for="nomeua" class="labelInput">Nome do Usuário:</label>
+    <input type="text" name="nomeua"id="nomeua" class="inputUser" value="<?php echo $nomeua ?>" required>
+  </div>
+  <br><br>
+  <div class="inputBox">
+    <label for="dataalug" class="labelInput">Data de Aluguel:</label>
+    <input type="date" name="dataalug" id="dataalug" class="inputUser" value="<?php echo $dataalug ?>" required>
+  </div>
+  <br><br>
+  <div class="inputBox">
+    <label for="dataprev" class="labelInput">Previsão de Devolução(<b>Máx. 30 dias</b>):</label>
+    <input type="date" name="dataprev" id="dataprev" class="inputUser" value="<?php echo $dataprev ?>" required>
+  </div>
+  <br><br>
+  <div class="inputBox">
+    <label for="datadev" class="labelInput">Data de Devolução:</label>
+    <input type="date" name="datadev" id="datadev" class="inputUser" value="<?php echo $datadev ?>">
+  </div>
+  <br><br>
+  <input type="hidden" name="id" value="<?php echo $id ?>">
+  <input type="submit" name="update" id="update">
+
+  </fieldset>
+  </form>
+</div>
+</body>
+</html>-->

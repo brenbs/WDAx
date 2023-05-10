@@ -1,0 +1,139 @@
+*{
+margin: 0;
+padding: 0;
+}
+/*Root*/
+:root{
+--azulc:rgb(102, 177, 200);
+--azul:rgb(15, 26, 75);
+}
+
+body{
+background-color: rgb(44, 69, 77);
+font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+font-size:15px;
+color:white;
+overflow-x:hidden;
+}
+
+header{
+position:relative;
+background-color:rgb(15, 26, 75);
+height: 110px;
+width:1366px;
+padding:1px;
+}
+
+/*Logo*/
+#dash{
+	text-decoration:none;
+	color:white;
+}
+
+#logo{
+width:100px;
+margin-left:550px;
+font-size:30px;
+display: flex;
+padding:1px;
+}
+
+#inicio{
+text-decoration:none;
+color:white;
+}
+
+/*nav bar*/
+nav{
+display:flex;
+font-size:20px;
+}
+
+nav a{
+margin-top:10px;
+margin-right:50px;
+margin-left:120px;
+color:white;
+text-decoration:none;
+}
+
+button{
+position:absolute;
+top:88px;
+left:1266px;
+background-color:rgb(15, 26, 75);
+color:white;
+border:none;
+font-size:15px;
+cursor:pointer;
+}
+
+/*Corpo*/
+#corpo{
+position:relative;
+background-color:rgb(180, 177, 173);
+width:500px;
+height:40px;
+border-radius:4px;
+width:300px;
+}
+
+/*Conteúdo*/
+
+#toptier{
+background-color:gray;
+position:absolute;
+margin:3px;
+top:144px;
+left:5px;
+width:650px;
+height:400px;
+display:flex;
+border:solid 1px black;
+padding:8px;
+}
+
+#grafico{
+width:400px;
+height:400px;
+
+}
+
+
+#devolv_prazo{
+background-color: gray;
+margin:3px;
+position:absolute;
+top:144px;
+width:638px;
+height:400px;
+left:685px;
+border:solid 1px black;
+padding:8px;
+}
+
+.lem{
+background-color: gray;
+position:absolute;
+top:570px;
+width:98%;
+height:300px;
+left:5px;
+display:flex;
+border:solid 1px black;
+padding:8px;
+}
+
+#alugA{
+width:400px;
+gap:20px;
+}
+	
+#livrAtras{
+width:400px;
+gap:20px;
+}
+#livrousu{
+width:400px;
+gap:20px;
+}
