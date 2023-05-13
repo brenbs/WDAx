@@ -70,7 +70,6 @@ $sql_mais_alugado = "SELECT nomela FROM alugados  WHERE nomela=nomela GROUP BY n
 $sql_graf="SELECT nomela , count(nomela) as quantidade_aluguel FROM alugados WHERE nomela=nomela GROUP BY nomela ORDER BY COUNT(nomela) DESC limit 5";
 $result_graf= $conexao->query($sql_graf);
 
-//geração dos dados 
 while($barra=$result_graf->fetch_assoc()){
   $nomel[]=$barra['nomela'];
   $desc[]=$barra['quantidade_aluguel'];
@@ -78,15 +77,95 @@ while($barra=$result_graf->fetch_assoc()){
 ?>
 
 <div id="grafico">
-  <canvas id="graf" width="20px;" height="20px;"></canvas>
+  <canvas id="graf" width="400px;" height="400px;"></canvas>
 </div>
 
 </div>
+
+<!--livros devolvidos 
 
 <div id="devolv_prazo">
-<h1>Quantos livros foram devolvidos</h1>
+<h3>Quantos livros foram devolvidos</h3>
+<img src="imagens/livro_devol.png" alt="">
+  
+//<?php
 
-<!--Função para total de livros devolvidos no prazo-->
+//$sql_livrod="SELECT count(datadev) as dentro_prazo FROM alugados where datadev!=0";
+//$result_livrod = $conexao->query($sql_livrod);
+//$total_livrod=$result_livrod->fetch_assoc();
+//if(isset($total_livrod['dentro_prazo'])){
+//$total_livrod= $total_livrod['dentro_prazo'];
+ // }
+  //echo"<br>";
+  //echo "Livros devolvidos dentro do prazo: ".$total_livrod."<br>";
+  
+  //?>
+</div> -->
+
+<div class="lem">
+  <div id="alugA">
+
+  <img src="imagens/livro02.png" alt="imagem1">
+
+    <?php
+    
+    $sql_total_alugueis = "SELECT COUNT(*) AS total_alugueis FROM alugados";
+    
+    $resultado_total_alugueis = $conexao->query($sql_total_alugueis);
+    
+    $linha_total_alugueis = $resultado_total_alugueis->fetch_assoc();
+    
+    if (isset($linha_total_alugueis['total_alugueis'])) {
+    
+      $quantidade_alugueis = $linha_total_alugueis['total_alugueis'];
+    
+    }
+    ?>
+    
+    <span class="text"><h3>Total de alugueis Ativos:</h3></span>
+    <span class="value"><?php echo $quantidade_alugueis."<br>"; ?></span>
+    
+  </div>
+  <div id="livrAtras">
+  <img src="imagens/devolv.png" alt="imagem2">
+  <h3>Quantidade de livros atrasados</h3>
+  <?php
+    // Função para total de livros não devolvidos 
+
+  $sql_dev="SELECT count(datadev) as fora_prazo FROM alugados where datadev=0";
+  $result_dev = $conexao->query($sql_dev);
+  $total_dev=$result_dev->fetch_assoc();
+  if(isset($total_dev['fora_prazo'])){
+  $total_dev= $total_dev['fora_prazo'];
+  }
+
+  echo $total_dev;
+
+  ?>
+  </div>
+
+  <div id="livrousu">
+    <img src="imagens/usuario01.png" alt="imagem3">
+    <h3>Estoque total de Livros</h3>
+    
+    <!--Função total de livros-->
+    <?php
+    $sql_total="SELECT sum(estoque) AS total_livro FROM livros";
+    $result_livro = $conexao->query($sql_total);
+    $total_livro=$result_livro->fetch_assoc();
+    if(isset($total_livro['total_livro'])){
+    $total_livro= $total_livro['total_livro'];
+    }
+
+    echo $total_livro;
+
+    ?>
+  </div>
+
+  <div id="devolv_prazo">
+
+<img src="imagens/livro_devol.png" alt="">
+<h3>Quantos livros foram devolvidos</h3>
   
 <?php
 
@@ -99,74 +178,11 @@ $total_livrod= $total_livrod['dentro_prazo'];
   echo "Livros devolvidos dentro do prazo: ".$total_livrod."<br>";
   
   ?>
-
-
-</div>
-
-<div class="lem">
-<div id="alugA">
-
-<img src="imagens/livro_emprestado.png" alt="imagem1">
-
-  <?php
-  
-  $sql_total_alugueis = "SELECT COUNT(*) AS total_alugueis FROM alugados";
-  
-  $resultado_total_alugueis = $conexao->query($sql_total_alugueis);
-  
-  $linha_total_alugueis = $resultado_total_alugueis->fetch_assoc();
-  
-  if (isset($linha_total_alugueis['total_alugueis'])) {
-  
-    $quantidade_alugueis = $linha_total_alugueis['total_alugueis'];
-  
-  }
-  ?>
-  
-  <span class="text"><h3>Total de alugueis Ativos:</h3></span>
-  <span class="value"><?php echo $quantidade_alugueis."<br>"; ?></span>
-  
-  
-  
-  
-</div>
-<div id="livrAtras">
-<img src="imagens/devolv.png" alt="imagem2">
-<h3>Quantidade de livros atrasados</h3>
-<?php
-  // Função para total de livros não devolvidos 
-
-$sql_dev="SELECT count(datadev) as fora_prazo FROM alugados where datadev=0";
-$result_dev = $conexao->query($sql_dev);
-$total_dev=$result_dev->fetch_assoc();
-if(isset($total_dev['fora_prazo'])){
-$total_dev= $total_dev['fora_prazo'];
-}
-
-echo $total_dev;
-
-?>
-</div>
-
-<div id="livrousu">
-  <img src="imagens/lemu.png" alt="imagem3">
-  <h3>Estoque total de Livros</h3>
-  
-  <!--Função total de livros-->
-  <?php
-  $sql_total="SELECT sum(estoque) AS total_livro FROM livros";
-  $result_livro = $conexao->query($sql_total);
-  $total_livro=$result_livro->fetch_assoc();
-  if(isset($total_livro['total_livro'])){
-  $total_livro= $total_livro['total_livro'];
-  }
-
-  echo $total_livro;
-
-  ?>
 </div>
 
 </div>
+
+
 
 </div>
 <script>
