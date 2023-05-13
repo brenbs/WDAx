@@ -85,8 +85,8 @@ background-color:gray;
 position:absolute;
 margin:3px;
 top:144px;
-left:5px;
-width:650px;
+left: 310px;
+width:600px;
 height:400px;
 display:flex;
 border:solid 1px black;
@@ -101,15 +101,8 @@ height:400px;
 
 
 #devolv_prazo{
-background-color: gray;
-margin:3px;
-position:absolute;
-top:144px;
-width:638px;
-height:400px;
-left:685px;
-border:solid 1px black;
-padding:8px;
+	width:400px;
+	gap:20px;
 }
 
 .lem{
@@ -137,3 +130,18 @@ gap:20px;
 width:400px;
 gap:20px;
 }
+
+/*devolv prazo
+#devolv_prazo{
+background-color: gray;
+margin:3px;
+position:absolute;
+top:144px;
+width:638px;
+height:400px;
+left:685px;
+border:solid 1px black;
+padding:8px;
+}
+
+*/
