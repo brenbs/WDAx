@@ -17,7 +17,7 @@
 			border-radius:10px;
 			padding:15px;
 			width:85%;
-			color:white;
+			color:black;
 			font-size:15px;
 		}
 		#inpute{
