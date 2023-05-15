@@ -1,16 +1,16 @@
 <?php
 include_once('config.php');
 
-$sql="SELECT*FROM livros ORDER BY id DESC";
+$sql="SELECT*FROM livros ORDER BY id ASC";
 
 if(!empty($_GET['search']))
 {
  $data=$_GET['search'];
- $sql="SELECT*FROM livros WHERE id LIKE '%$data%' or nomel LIKE '%$data%' or autor LIKE '%$data%'  or editoral LIKE '%$data%' or lanc LIKE '%$data%' or estoque LIKE '%$data%' ORDER BY id DESC";
+ $sql="SELECT*FROM livros WHERE id LIKE '%$data%' or nomel LIKE '%$data%' or autor LIKE '%$data%'  or editoral LIKE '%$data%' or lanc LIKE '%$data%' or estoque LIKE '%$data%' ORDER BY id ASC";
   
 }
 else{
- $sql="SELECT*FROM livros ORDER BY id DESC";
+ $sql="SELECT*FROM livros ORDER BY id ASC";
 }
 
 $result=$conexao->query($sql);
