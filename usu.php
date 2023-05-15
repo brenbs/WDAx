@@ -2,16 +2,16 @@
 
 include_once('config.php');
 
-$sql="SELECT*FROM usuarios ORDER BY id DESC";
+$sql="SELECT*FROM usuarios ORDER BY id ASC";
 
 if(!empty($_GET['search']))
 {
  $data=$_GET['search'];
- $sql="SELECT*FROM usuarios WHERE id LIKE '%$data%' or usuario LIKE '%$data%' or emailu LIKE '%$data%' or numerou LIKE '%$data%' or enderecou LIKE '%$data%' or cidadeu LIKE '%$data%' or cpfu LIKE '%$data%'ORDER BY id DESC";
+ $sql="SELECT*FROM usuarios WHERE id LIKE '%$data%' or usuario LIKE '%$data%' or emailu LIKE '%$data%' or numerou LIKE '%$data%' or enderecou LIKE '%$data%' or cidadeu LIKE '%$data%' or cpfu LIKE '%$data%'ORDER BY id ASC";
 
 }
 else{
- $sql="SELECT*FROM usuarios ORDER BY id DESC";
+ $sql="SELECT*FROM usuarios ORDER BY id ASC";
 }
 
 $result=$conexao->query($sql);
