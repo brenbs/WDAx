@@ -1,15 +1,15 @@
 <?php
 
 include_once('config.php');
-$sql="SELECT*FROM alugados ORDER BY id DESC";
+$sql="SELECT*FROM alugados ORDER BY id ASC";
 
 if(!empty($_GET['search']))
 {
  $data=$_GET['search'];
- $sql="SELECT*FROM alugados WHERE id LIKE '%$data%' or nomela LIKE '%$data%'  or nomeua LIKE '%$data%' or dataalug LIKE '%$data%' or dataprev LIKE '%$data%' or datadev LIKE '%$data%' ORDER BY id DESC";
+ $sql="SELECT*FROM alugados WHERE id LIKE '%$data%' or nomela LIKE '%$data%'  or nomeua LIKE '%$data%' or dataalug LIKE '%$data%' or dataprev LIKE '%$data%' or datadev LIKE '%$data%' ORDER BY id ASC";
 }
 else{
- $sql="SELECT*FROM alugados ORDER BY id DESC";
+ $sql="SELECT*FROM alugados ORDER BY id ASC";
 }
 
 $result=$conexao->query($sql);
@@ -100,8 +100,7 @@ $result=$conexao->query($sql);
     <th scope="col">Nome do Usuário:</th>
     <th scope="col">Data de Aluguel:</th>
     <th scope="col">Previsão de Devolução:</th>
-    <th scope="col">Data de Devolução:</th>
-    <th scope="col">...</th>
+    <th scope="col">Status</th>
     <th scope="col"><a  id="novo" href="alugcad.php"><b>Novo +</b></a></th>
 
     </tr>
@@ -138,10 +137,7 @@ $result=$conexao->query($sql);
               echo "<td class='itens'><a href='aluguelDelete.php?id=$user_data[id]'><img src='imagens/lixeiramenor.png' alt='Bin' title='Deletar'></a></td>";
           }
       }
-        echo"<td>
-            <a href='aluguelEdit.php?id=$user_data[id]'><img src='imagens/lapismenor.png'>
-            </a>
-            </td>";
+       
             echo"</tr>";
         echo"</tr>";
       }
