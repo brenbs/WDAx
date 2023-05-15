@@ -83,24 +83,7 @@ while($barra=$result_graf->fetch_assoc()){
 </div>
 
 <!--livros devolvidos 
-
-<div id="devolv_prazo">
-<h3>Quantos livros foram devolvidos</h3>
-<img src="imagens/livro_devol.png" alt="">
-  
-//<?php
-
-//$sql_livrod="SELECT count(datadev) as dentro_prazo FROM alugados where datadev!=0";
-//$result_livrod = $conexao->query($sql_livrod);
-//$total_livrod=$result_livrod->fetch_assoc();
-//if(isset($total_livrod['dentro_prazo'])){
-//$total_livrod= $total_livrod['dentro_prazo'];
- // }
-  //echo"<br>";
-  //echo "Livros devolvidos dentro do prazo: ".$total_livrod."<br>";
-  
-  //?>
-</div> -->
+-->
 
 <div class="lem">
   <div id="alugA">
@@ -127,7 +110,7 @@ while($barra=$result_graf->fetch_assoc()){
     
   </div>
   <div id="livrAtras">
-  <img src="imagens/devolv.png" alt="imagem2">
+  <img src="imagens/livr.png" alt="imagem2">
   <h3>Quantidade de livros atrasados</h3>
   <?php
     // Função para total de livros não devolvidos 
@@ -164,7 +147,7 @@ while($barra=$result_graf->fetch_assoc()){
 
   <div id="devolv_prazo">
 
-<img src="imagens/livro_devol.png" alt="">
+<img src="imagens/livr.png" alt="">
 <h3>Quantos livros foram devolvidos</h3>
   
 <?php
