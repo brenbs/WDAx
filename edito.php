@@ -1,15 +1,15 @@
 <?php
 include_once('config.php');
 
-$sql="SELECT*FROM editoras ORDER BY id DESC";
+$sql="SELECT*FROM editoras ORDER BY id ASC";
 
 if(!empty($_GET['search']))
 {
  $data=$_GET['search'];
- $sql="SELECT*FROM editoras WHERE id LIKE '%$data%' or nomee LIKE '%$data%' or emaile LIKE '%$data%'  or numeroe LIKE '%$data%' or sitee LIKE '%$data%' ORDER BY id DESC";
+ $sql="SELECT*FROM editoras WHERE id LIKE '%$data%' or nomee LIKE '%$data%' or emaile LIKE '%$data%'  or numeroe LIKE '%$data%' or sitee LIKE '%$data%' ORDER BY id ASC";
 }
 else{
- $sql="SELECT*FROM editoras ORDER BY id DESC";
+ $sql="SELECT*FROM editoras ORDER BY id ASC";
 }
 
 $result=$conexao->query($sql);
