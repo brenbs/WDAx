@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+/*Typical Device Breackpoints
+-----------------------------
+Pequenas telas:até 600px
+Celular:de 600px até 768px
+Tablet:768px até 992px
+Desktop:992px até 1200px
+Grandes telas:acima de 1200px
+*/
+
+@media screen and (max-width:768px){
+ header{
+  width:740px;
+ }
+ #logo{
+  width:100px;
+  margin-left:250px;
+  font-size:25px;
+  display: flex;
+ 
+  padding:1px;
+  }
+ nav{
+ font-size:20px;
+ }
+ nav a{
+  margin-left:35px;
+  margin-right:18px;
+ }
+ #burguer{
+  display:block;
+ }
+ button{
+  top:94px;
+  left:630px;
+  font-size:13px;
+ }
+
+ #toptier{
+  margin:1px;
+  left: 2px;
+  width:650px;
+  padding:8px;
+  display:flex;
+  }
+  
+  #grafico{
+  width:400px;
+  }
+  h1{
+   font-size:25px;
+  }
+  .lem{
+   width:650px;
+   height:1010px;
+  }
+}
