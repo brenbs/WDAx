@@ -15,75 +15,74 @@ $sql="SELECT*FROM usuarios ORDER BY id DESC";
 
 $result=$conexao->query($sql);
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Locadora de Livros</title>
-<link rel="stylesheet" href="estilos/dash.css ?<?php echo rand(1, 1000); ?>" >
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Locadora de Livros</title>
+  <link rel="stylesheet" href="estilos/dash.css ?<?php echo rand(1, 1000); ?>" >
+  <link rel="stylesheet" href="estilos/resp.css">
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
 <!--cabeçalho-->
 <header>
-<!--Logo-->
-<a id="dash" href="dash.php">
-<div id="logo">
-<img src="imagens/logo4.png">WDA Livraria
-</div>
-</a>
-<!--Barra de navegação-->
-<nav>
-<a href="dash.php">Dashboard</a>
- <a href="alug.php">Alugados</a>
- <a href="edito.php">Editoras</a>
- <a href="livr.php">Livros</a>
- <a href="usu.php">Usuários</a>
-
- <a href="home.php">
- <button id="sair"><b>Sair</b></button>
-</a>
-</nav>
-</header>
+  <!--Logo-->
+  <a id="dash" href="dash.php">
+  <div id="logo">
+  <img src="imagens/logo4.png">WDA Livraria
+  </div>
+  </a>
+  <!--Barra de navegação-->
+  <div id="burguer">
+    <nav>
+    <a href="dash.php">Dashboard</a>
+    <a href="alug.php">Alugados</a>
+    <a href="edito.php">Editoras</a>
+    <a href="livr.php">Livros</a>
+    <a href="usu.php">Usuários</a>
+    <a href="home.php">
+    <button id="sair"><b>Sair</b></button>
+    </a>
+    </nav>
+  </div>
+  </header>
 
 <!--Corpo-->
 <div class="corpo">
 
 <div id="toptier"><h1>Livros mais alugados</h1>
 
-<?php
-$sql_mais_alugado = "SELECT nomela FROM alugados  WHERE nomela=nomela GROUP BY nomela ORDER BY COUNT(nomela) DESC LIMIT 1";
-  $resultado_mais_alugado = $conexao->query($sql_mais_alugado);
-  $mais_alugado = $resultado_mais_alugado->fetch_assoc();
-  if(isset( $mais_alugado['nomela'])){
-  $mais_alug=  $mais_alugado['nomela'];
-  }
+  <?php
+  $sql_mais_alugado = "SELECT nomela FROM alugados  WHERE nomela=nomela GROUP BY nomela ORDER BY COUNT(nomela) DESC LIMIT 1";
+    $resultado_mais_alugado = $conexao->query($sql_mais_alugado);
+    $mais_alugado = $resultado_mais_alugado->fetch_assoc();
+    if(isset( $mais_alugado['nomela'])){
+    $mais_alug=  $mais_alugado['nomela'];
+    }
+  ?>
 
-?>
+  <!--Gráfico-->
+  <?php
+    $sql_graf="SELECT nomela , count(nomela) as quantidade_aluguel FROM alugados WHERE nomela=nomela GROUP BY nomela ORDER BY COUNT(nomela) DESC limit 5";
+    $result_graf= $conexao->query($sql_graf);
 
-<!--Gráfico-->
-<?php
-$sql_graf="SELECT nomela , count(nomela) as quantidade_aluguel FROM alugados WHERE nomela=nomela GROUP BY nomela ORDER BY COUNT(nomela) DESC limit 5";
-$result_graf= $conexao->query($sql_graf);
+    while($barra=$result_graf->fetch_assoc()){
+      $nomel[]=$barra['nomela'];
+      $desc[]=$barra['quantidade_aluguel'];
+    }
+  ?>
 
-while($barra=$result_graf->fetch_assoc()){
-  $nomel[]=$barra['nomela'];
-  $desc[]=$barra['quantidade_aluguel'];
-}
-?>
+  <div id="grafico">
+    <canvas id="graf" width="400px;" height="400px;"></canvas>
+  </div>
 
-<div id="grafico">
-  <canvas id="graf" width="400px;" height="400px;"></canvas>
 </div>
 
-</div>
-
-<!--livros devolvidos 
--->
+<!--livros devolvidos -->
 
 <div class="lem">
   <div id="alugA">
@@ -113,7 +112,7 @@ while($barra=$result_graf->fetch_assoc()){
   <img src="imagens/livr.png" alt="imagem2">
   <h3>Quantidade de livros atrasados</h3>
   <?php
-    // Função para total de livros não devolvidos 
+    // total de livros não devolvidos 
 
   $sql_dev="SELECT count(datadev) as fora_prazo FROM alugados where datadev=0";
   $result_dev = $conexao->query($sql_dev);
@@ -131,7 +130,7 @@ while($barra=$result_graf->fetch_assoc()){
     <img src="imagens/usuario01.png" alt="imagem3">
     <h3>Estoque total de Livros</h3>
     
-    <!--Função total de livros-->
+    <!-- total de livros-->
     <?php
     $sql_total="SELECT sum(estoque) AS total_livro FROM livros";
     $result_livro = $conexao->query($sql_total);
@@ -164,8 +163,6 @@ $total_livrod= $total_livrod['dentro_prazo'];
 </div>
 
 </div>
-
-
 
 </div>
 <script>
