@@ -13,7 +13,6 @@ background-color: rgb(44, 69, 77);
 font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 font-size:15px;
 color:white;
-overflow-x:hidden;
 }
 
 header{
@@ -85,7 +84,7 @@ background-color:gray;
 position:absolute;
 margin:3px;
 top:144px;
-left: 310px;
+left: 2px;
 width:600px;
 height:400px;
 display:flex;
@@ -130,18 +129,3 @@ gap:20px;
 width:400px;
 gap:20px;
 }
-
-/*devolv prazo
-#devolv_prazo{
-background-color: gray;
-margin:3px;
-position:absolute;
-top:144px;
-width:638px;
-height:400px;
-left:685px;
-border:solid 1px black;
-padding:8px;
-}
-
-*/
