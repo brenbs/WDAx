@@ -6,31 +6,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="estilos/index.css">
 	<title>WDA Locadora de Livros Login</title>
-	<style>
-		
-		#inputD{
-			
-			background-color:none;
-			border:none;
-			border-bottom:1px solid white;
-			outline:none;
-			border-radius:10px;
-			padding:15px;
-			width:85%;
-			color:black;
-			font-size:15px;
-		}
-		#inpute{
-			background-color:rgb(15, 26, 75);
-			border:none;
-			border-radius:10px;
-			padding:15px;
-			width:85%;
-			color:white;
-			font-size:15px;
-			cursor:pointer;
-		}
-	</style>
+<style>
+#inputD{
+	border:none;
+	outline:none;
+	border-radius:10px;
+	padding:15px;
+	width:85%;
+	color:black;
+	font-size:15px;
+}
+#inpute{
+	background-color:rgb(15, 26, 75);
+	border:none;
+	border-radius:10px;
+	padding:15px;
+	width:85%;
+	color:white;
+	font-size:15px;
+	cursor:pointer;
+	}
+</style>
 </head>
 <body>
 <div class="box">
