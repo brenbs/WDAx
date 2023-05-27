@@ -19,7 +19,7 @@ header{
 position:relative;
 background-color:rgb(15, 26, 75);
 height: 110px;
-width:1366px;
+width:1345px;
 padding:1px;
 }
 
@@ -51,15 +51,12 @@ font-size:20px;
 nav a{
 margin-top:10px;
 margin-right:50px;
-margin-left:120px;
+margin-left:115px;
 color:white;
 text-decoration:none;
 }
 
 button{
-position:absolute;
-top:88px;
-left:1266px;
 background-color:rgb(15, 26, 75);
 color:white;
 border:none;
@@ -79,7 +76,8 @@ width:300px;
 
 /*Conteúdo*/
 
-#toptier{
+#toptier,
+.ativalug{
 background-color:gray;
 position:absolute;
 margin:3px;
@@ -92,12 +90,14 @@ border:solid 1px black;
 padding:8px;
 }
 
-#grafico{
+#grafico01{
 width:400px;
 height:400px;
-
 }
 
+.ativalug{
+	left:650px;
+}
 
 #devolv_prazo{
 	width:400px;
