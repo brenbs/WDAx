@@ -9,13 +9,19 @@ Desktop:992px até 1200px
 Grandes telas:acima de 1200px
 */
 
-@media screen and (max-width:768px){
+/*
+viewport:500x504
+window:*/
+
+/*tela para celular*/
+@media screen and (max-width:500px){
+ /*dashboard*/
  header{
-  width:740px;
+  width: 500px;
  }
  #logo{
-  width:100px;
-  margin-left:250px;
+  width:10px;
+  margin-left:180px;
   font-size:25px;
   display: flex;
  
@@ -25,34 +31,76 @@ Grandes telas:acima de 1200px
  font-size:20px;
  }
  nav a{
-  margin-left:35px;
-  margin-right:18px;
+  margin-left:8px;
+  margin-right:10px;
  }
  #burguer{
   display:block;
  }
  button{
   top:94px;
-  left:630px;
   font-size:13px;
  }
 
  #toptier{
   margin:1px;
   left: 2px;
-  width:650px;
+  width:461px;
   padding:8px;
   display:flex;
+  font-size:18px;
   }
   
   #grafico{
   width:400px;
   }
   h1{
-   font-size:25px;
+  font-size:18px;
   }
   .lem{
-   width:650px;
-   height:1010px;
+  left:2px;
+  width:461px;
+  height:1010px;
+  display:block;
   }
+
+  /*Alugados,Editoras,Livros,Usuários*/
+
+  #sair{
+  top:92px;
+  left:445px;
+  font-size:15px;
+  }
+
+  .corpo{
+  margin-top:30px;
+  margin-left:3px;
+  width:430px;
+  height:100px;
+  border-collapse:collapse;
+  border-radius:4px;
+  }
+
+  .box-search{
+  top:130px;
+  left:281px;
+  }
+  #pesquisar{
+  width:200px;
+  }
+  #pesq{
+  left:150px;
+  }
+
+  /*tabelas*/
+  table{
+  width:430px;
+  border-collapse:collapse;
+  }
+    
+  td{
+  padding:4px;
+  }
+    
+    
 }
