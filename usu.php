@@ -23,37 +23,8 @@ $result=$conexao->query($sql);
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Locadora de Livros</title>
-<link rel="stylesheet" href="estilos/livr.css">
-<style>
-    body{
-    overflow-x:hidden;
-  }
-  #novo{
-    text-decoration:none;
-    color:white;
-  }
-  .box-search{
-    position:absolute;
-    display:flex;
-    top:150px;
-    left:850px;
-    gap:0.1%;
-  }
-  #pesquisar{
-    width:300px;
-    height:30px;
-  }
-  #pesq{
-    position:absolute;
-    top:0px;
-    left:300px;
-    background-color:none;
-    width:50px;
-    height:30px;
-
-  }
-
-</style>
+<link rel="stylesheet" href="estilos/livr.css?<?php echo rand(1, 1000); ?>">
+<link rel="stylesheet" href="estilos/resp.css?<?php echo rand(1, 1000); ?>">
 </head>
 <body>
 <!--cabeçalho-->
@@ -66,16 +37,14 @@ $result=$conexao->query($sql);
 </a>
 <!--Barra de navegação-->
 <nav>
-<a href="dash.php">Dashboard</a>
+ <a href="dash.php">Dashboard</a>
  <a href="alug.php">Alugados</a>
  <a href="edito.php">Editoras</a>
  <a href="livr.php">Livros</a>
  <a href="usu.php">Usuários</a>
-
-<a href="home.php">
- <button id="sair"><b>Sair</b></button>
-</a>
+ <a href="home.php"><button id="sair"><b>Sair</b></button></a>
 </nav>
+
 </header>
 <!--Corpo-->
 <div class="corpo">
@@ -123,6 +92,25 @@ $result=$conexao->query($sql);
      </td>";
      echo"</tr>";
     }
+    // Define o número de registros por página
+    $item_por_pag = 5;
+    $pag_atual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+    $offset = ($pag_atual - 1) * $item_por_pag;
+    $search = isset($_GET['pesquisar']) ? $_GET['pesquisar'] : '';
+
+    // Construa a consulta SQL com base nos parâmetros
+    $result = $conexao->query($sql);
+    $total_reg = $result->num_rows;
+    $totalPaginas = ceil($total_reg / $item_por_pag);
+    if (!empty($search)) {
+        $sqlseach = "SELECT * FROM  editora WHERE nome LIKE '%$data%'  OR email LIKE '%$data%' OR telefone LIKE '%$data%'  ORDER BY id DESC";
+        $result = $conexao->query($sqlseach);
+    } else {
+        $sql = "SELECT * FROM editora
+        ORDER BY id ASC 
+        LIMIT $item_por_pag OFFSET $offset";
+        $result = $conexao->query($sql);
+       }
    ?>
   </tbody>
  </table>
