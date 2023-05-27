@@ -22,36 +22,8 @@ $result=$conexao->query($sql);
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Locadora de Livros</title>
-<link rel="stylesheet" href="estilos/livr.css">
-<style>
-    body{
-    overflow-x:hidden;
-  }
-  #novo{
-    text-decoration:none;
-    color:white;
-  }
-  .box-search{
-    position:absolute;
-    display:flex;
-    top:150px;
-    left:850px;
-    gap:0.1%;
-  }
-  #pesquisar{
-    width:300px;
-    height:30px;
-  }
-  #pesq{
-    position:absolute;
-    top:0px;
-    left:300px;
-    background-color:none;
-    width:50px;
-    height:30px;
-
-  }
-</style>
+<link rel="stylesheet" href="estilos/livr.css?<?php echo rand(1, 1000); ?>">
+<link rel="stylesheet" href="estilos/resp.css?<?php echo rand(1, 1000); ?>">
 </head>
 <body>
 
@@ -70,12 +42,9 @@ $result=$conexao->query($sql);
  <a href="edito.php">Editoras</a>
  <a href="livr.php">Livros</a>
  <a href="usu.php">Usuários</a>
-
- <a href="home.php">
- <button id="sair"><b>Sair</b></button>
-</a>
-
+ <a href="home.php"><button id="sair"><b>Sair</b></button></a>
 </nav>
+
 </header>
 
 <!--Corpo-->
