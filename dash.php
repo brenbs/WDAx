@@ -23,8 +23,8 @@ $result=$conexao->query($sql);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Locadora de Livros</title>
-  <link rel="stylesheet" href="estilos/dash.css ?<?php echo rand(1, 1000); ?>" >
-  <link rel="stylesheet" href="estilos/resp.css">
+  <link rel="stylesheet" href="estilos/dash.css?<?php echo rand(1, 1000); ?>">
+  <link rel="stylesheet" href="estilos/resp.css?<?php echo rand(1, 1000); ?>">
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
@@ -44,9 +44,7 @@ $result=$conexao->query($sql);
     <a href="edito.php">Editoras</a>
     <a href="livr.php">Livros</a>
     <a href="usu.php">Usuários</a>
-    <a href="home.php">
-    <button id="sair"><b>Sair</b></button>
-    </a>
+    <a href="home.php"><button id="sair"><b>Sair</b></button></a>
     </nav>
   </div>
   </header>
@@ -54,33 +52,45 @@ $result=$conexao->query($sql);
 <!--Corpo-->
 <div class="corpo">
 
-<div id="toptier"><h1>Livros mais alugados</h1>
+ <!--Gráfico01-->
 
-  <?php
-  $sql_mais_alugado = "SELECT nomela FROM alugados  WHERE nomela=nomela GROUP BY nomela ORDER BY COUNT(nomela) DESC LIMIT 1";
-    $resultado_mais_alugado = $conexao->query($sql_mais_alugado);
-    $mais_alugado = $resultado_mais_alugado->fetch_assoc();
-    if(isset( $mais_alugado['nomela'])){
-    $mais_alug=  $mais_alugado['nomela'];
-    }
-  ?>
+  <div id="toptier"><h1>Livros mais alugados</h1>
 
-  <!--Gráfico-->
-  <?php
-    $sql_graf="SELECT nomela , count(nomela) as quantidade_aluguel FROM alugados WHERE nomela=nomela GROUP BY nomela ORDER BY COUNT(nomela) DESC limit 5";
-    $result_graf= $conexao->query($sql_graf);
+    <?php
+      //grafico01
+      $sql_mais_alugado = "SELECT nomela FROM alugados  WHERE nomela=nomela GROUP BY nomela ORDER BY COUNT(nomela) DESC LIMIT 1";
+      $resultado_mais_alugado = $conexao->query($sql_mais_alugado);
+      $mais_alugado = $resultado_mais_alugado->fetch_assoc();
 
-    while($barra=$result_graf->fetch_assoc()){
-      $nomel[]=$barra['nomela'];
-      $desc[]=$barra['quantidade_aluguel'];
-    }
-  ?>
+      if(isset( $mais_alugado['nomela'])){
+       $mais_alug=  $mais_alugado['nomela'];
+      }
+      //grafico02
+      $sql_grafico01="SELECT nomeua , count(nomela) as user_ativos FROM alugados GROUP BY nomeua ORDER BY count(nomela) DESC limit 5";
+      $resultado_grafico01= $conexao->query($sql_grafico01);
+      //geração dos dados 
 
-  <div id="grafico">
-    <canvas id="graf" width="400px;" height="400px;"></canvas>
+      while($pizza=$resultado_grafico01->fetch_assoc()){
+        $user[]=$pizza['nomeua'];
+        $dados[]=$pizza['user_ativos'];
+      }
+    ?>
+    <div id="grafico01">
+      <canvas id="graf" width="400px;" height="400px;"></canvas>
+    </div>
+
   </div>
+ <!--Gráfico02-->
+ <div class="ativalug">
+  <canvas id="grafico01" style="margin-top:5px;"></canvas>
+  <p style="font-size:1.2em; text-align: center; margin-left: 80px; text-weight:bold;">Livros Mais alugados</p>
 
-</div>
+  <div class="grafico02">
+
+  <canvas id="grafico02"></canvas>
+
+  <p style="font-size:1.2em; text-align: center;">Quantidade de alugueis por Usuário</p>
+ </div>
 
 <!--livros devolvidos -->
 
@@ -125,6 +135,7 @@ $result=$conexao->query($sql);
 
   ?>
   </div>
+
 
   <div id="livrousu">
     <img src="imagens/usuario01.png" alt="imagem3">
