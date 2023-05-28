@@ -28,28 +28,32 @@ if(isset($_POST['submit'])){
 <!--formulario-->
 
 <div class="box">
-  <form action="editocad.php" method="POST">
+  <form action="editocad.php" method="POST" id="form">
     <fieldset>
      <legend><b>Cadastro de Editoras</b></legend>
      <br>
       <div class="inputBox">
       <label for="nomee" class="labelInput">Nome da Editora:</label>
-      <input type="text" name="nomee" id="nomee" class="inputUser" required>
+      <input type="text" name="nomee" id="nomee" class="inputUser required"  placeholder=" "  oninput="nameValidate()">
+      <span class="span-required">*Preencha esse campo corretamente !</span>
       </div>
       <br><br>
       <div class="inputBox">
         <label for="emaile" class="labelInput">Email da Editora:</label>
-       <input type="email" name="emaile" id="emaile" class="inputUser" required>
+       <input type="email" name="emaile" id="emaile"class="inputUser required"  placeholder=" "  oninput="emailValidate()">
+       <span class="span-required">*Preencha esse campo corretamente !</span>
       </div>
       <br><br>
       <div class="inputBox">
        <label for="numeroe" class="labelInput">Número celular:</label>
-       <input type="tel" name="numeroe" id="numeroe" class="inputUser" required>
+       <input type="tel" name="numeroe" id="numeroe" class="inputUser required"  placeholder=" "  oninput="telValidate()">
+       <span class="span-required">*Preencha esse campo corretamente !</span>
       </div>
       <br><br>
       <div class="inputBox">
       <label for="sitee" class="labelInput">Site da Editora (opcional):</label>
-       <input type="text" name="sitee" id="sitee" class="inputUser">
+       <input type="text" name="sitee" id="sitee">
+       <span class="span-required">*Preencha esse campo corretamente !</span>
       </div>
       
       <br><br>
@@ -59,5 +63,59 @@ if(isset($_POST['submit'])){
     </fieldset>
   </form>
 </div>
+
+<script>
+      //pegando todos os dados do formulário 
+      var form = document.getElementById('form');
+      var campos = document.querySelectorAll('.required');
+      var spans = document.querySelectorAll('.span-required');
+      var emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+      
+      //criando a validação do formulário
+      form.addEventListener('submit',(event)=>{
+        if(campos[0].value.length!=0 && campos[1].value.length!=0 && campos[2].value.length!=0){
+          
+        }else{
+        nameValidate();
+        emailValidate();
+        telValidate();
+        event.preventDefault();
+        }
+      })
+        
+      //função alert
+      function setError(index){
+        campos[index].style.color = '#e63636'
+        spans[index].style.display ='block'
+      }
+      function removeError(index){
+        campos[index].style.color = ''
+        spans[index].style.display ='none'
+      }
+      //validando nome
+      function nameValidate(){
+        if(campos[0].value.length < 3){
+           setError(0);
+        }else{
+         removeError(0)
+        }
+      }
+      //email
+      function emailValidate(){
+        if(emailRegex.test(campos[1].value)){
+          removeError(1);
+        }else{
+          setError(1)
+        }
+      }
+      //telefone
+      function telValidate(){
+        if(campos[2].value.length < 3){
+           setError(2);
+        }else{
+         removeError(2)
+        }
+      }
+   </script>
 </body>
 </html>
