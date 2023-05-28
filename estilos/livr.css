@@ -1,123 +1,124 @@
 *{
-margin: 0;
-padding: 0;
-}
-/*Root*/
-:root{
---azulc:rgb(102, 177, 200);
---azul:rgb(15, 26, 75);
-}
-
-body{
-background-color: rgb(44, 69, 77);
-font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-font-size:15px;
-color:white;
-overflow-x: hidden;
-}
-
-header{
-position:relative;
-background-color:rgb(15, 26, 75);
-height: 110px;
-width:1800px;
-padding:1px;
-}
-
-/*Logo*/
-#dash{
-text-decoration:none;
-color:white;
-}
-
-#logo{
-width:100px;
-margin-left:550px;
-font-size:30px;
-display: flex;
-padding:1px;
-}
-
-#inicio{
-text-decoration:none;
-color:white;
-}
-
-/*nav bar*/
-nav{
-display:flex;
-font-size:20px;
-}
-
-nav a{
-margin-top:10px;
-margin-right:50px;
-margin-left:120px;
-margin-bottom: 10px;
-color:white;
-text-decoration:none;
-}
-
-#sair{
-position:absolute;
-top:88px;
-left:1266px;
-background-color:rgb(15, 26, 75);
-color:white;
-border:none;
-font-size:15px;
-cursor:pointer;
-}
-
-/*Corpo*/
-.corpo{
-margin-top:30px;
-margin-left:100px;
-width:1800px;
-height:100px;
-border-radius:4px;
-}
-
-/*Conteúdo*/
-
-table{
- width:1100px;
- border-collapse:collapse;
- background-color: rgb(88, 85, 85);
-}
-
-td{
- border:1px solid rgb(128, 121, 121);
- padding:8px;
-}
-thead{
- background-color: rgb(70, 68, 67);
-}
-thead #novo{
- text-decoration: none;
+ margin: 0;
+ padding: 0;
+ }
+ /*Root*/
+ :root{
+ --azulc:rgb(102, 177, 200);
+ --azul:rgb(15, 26, 75);
+ }
+ 
+ body{
+ background-color: rgb(44, 69, 77);
+ font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+ font-size:15px;
  color:white;
-}
-
-#novo{
+ overflow-x: hidden;
+ }
+ 
+ header{
+ position:relative;
+ background-color:rgb(15, 26, 75);
+ height: 110px;
+ width:1800px;
+ padding:1px;
+ }
+ 
+ /*Logo*/
+ #dash{
  text-decoration:none;
  color:white;
-}
-.box-search{
- position:absolute;
+ }
+ 
+ #logo{
+ width:100px;
+ margin-left:550px;
+ font-size:30px;
+ display: flex;
+ padding:1px;
+ }
+ 
+ #inicio{
+ text-decoration:none;
+ color:white;
+ }
+ 
+ /*nav bar*/
+ nav{
  display:flex;
- top:150px;
- left:850px;
- gap:0.1%;
-}
-#pesquisar{
- width:300px;
- height:30px;
-}
-#pesq{
+ font-size:20px;
+ }
+ 
+ nav a{
+ margin-top:10px;
+ margin-right:50px;
+ margin-left:120px;
+ margin-bottom: 10px;
+ color:white;
+ text-decoration:none;
+ }
+ 
+ #sair{
  position:absolute;
- top:0px;
- left:300px;
- background-color:none;
- width:50px;
- height:30px;
-}
+ top:88px;
+ left:1266px;
+ background-color:rgb(15, 26, 75);
+ color:white;
+ border:none;
+ font-size:15px;
+ cursor:pointer;
+ }
+ 
+ /*Corpo*/
+ .corpo{
+ margin-top:30px;
+ margin-left:100px;
+ width:1800px;
+ height:100px;
+ border-radius:4px;
+ }
+ 
+ /*Conteúdo*/
+ 
+ table{
+  width:1100px;
+  border-collapse:collapse;
+  background-color: rgb(88, 85, 85);
+  margin-bottom:30px solid;
+ }
+ 
+ td{
+  border:1px solid rgb(128, 121, 121);
+  padding:8px;
+ }
+ thead{
+  background-color: rgb(70, 68, 67);
+ }
+ thead #novo{
+  text-decoration: none;
+  color:white;
+ }
+ 
+ #novo{
+  text-decoration:none;
+  color:white;
+ }
+ .box-search{
+  position:absolute;
+  display:flex;
+  top:150px;
+  left:850px;
+  gap:0.1%;
+ }
+ #pesquisar{
+  width:300px;
+  height:30px;
+ }
+ #pesq{
+  position:absolute;
+  top:0px;
+  left:300px;
+  background-color:none;
+  width:50px;
+  height:30px;
+ }
