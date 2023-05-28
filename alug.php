@@ -1,15 +1,72 @@
 <?php
-
+//ligar ao bd
 include_once('config.php');
 $sql="SELECT*FROM alugados ORDER BY id ASC";
 
+//pesquisar se tiver algo na barra de pesquisa
 if(!empty($_GET['search']))
 {
  $data=$_GET['search'];
  $sql="SELECT*FROM alugados WHERE id LIKE '%$data%' or nomela LIKE '%$data%'  or nomeua LIKE '%$data%' or dataalug LIKE '%$data%' or dataprev LIKE '%$data%' or datadev LIKE '%$data%' ORDER BY id ASC";
 }
 else{
- $sql="SELECT*FROM alugados ORDER BY id ASC";
+  
+  //se estiver vazia,então mostra todos os registros  
+  //paginação
+  $pagina=1;
+
+  if(isset($_GET['pagina']))
+  $pagina=filter_input(INPUT_GET,"pagina",FILTER_VALIDATE_INT);
+
+  if(!$pagina)
+  $pagina=1;
+
+  $limite=5;
+
+  $inicio=($pagina*$limite)-$limite;
+
+  $registros=0;
+  
+  $registros=$conexao->query("SELECT COUNT(nomela) AS $registros FROM alugados");
+
+  $paginas=ceil($registros/$limite);
+
+
+ $sql="SELECT*FROM alugados ORDER BY id LIMIT $inicio,$limite";
+}
+
+//ordenar nome  do livro
+if (isset($_GET['namela'])) {
+  $sql="SELECT * FROM alugados ORDER BY nomela ASC";
+  $result = $conexao -> query($sql);
+
+  if($_GET['namela']==1){
+    $sql="SELECT * FROM alugados ORDER BY nomela DESC";
+    $result = $conexao -> query($sql);
+  }
+}
+
+//ordenar nome  do usuário
+if (isset($_GET['nameua'])) {
+  $sql="SELECT * FROM alugados ORDER BY nomeua ASC";
+  $result = $conexao -> query($sql);
+
+  if($_GET['nameua']==1){
+    $sql="SELECT * FROM alugados ORDER BY nomeua DESC";
+    $result = $conexao -> query($sql);
+  }
+}
+
+
+//ordenar id crescente 
+if (isset($_GET['coda'])) {
+  $sql="SELECT * FROM alugados ORDER BY id ASC";
+  $result = $conexao -> query($sql);
+
+  if($_GET['coda']==1){
+    $sql="SELECT * FROM alugados ORDER BY id DESC";
+    $result = $conexao -> query($sql);
+  }
 }
 
 $result=$conexao->query($sql);
@@ -64,9 +121,15 @@ $result=$conexao->query($sql);
 <table class="table">
   <thead>
     <tr>
-    <th scope="col">#</th>
-    <th scope="col">Nome do Livro:</th>
-    <th scope="col">Nome do Usuário:</th>
+    <th scope="col"># <a href="alug.php?coda=true" id="nome_table"><img src="imagens/seta_pra_cima.svg" alt="Ordem crescente"></a> 
+      <a href="alug.php?coda=1"><img src="imagens/seta_pra_baixo.svg" alt="Ordem decrescente"></a></th>
+
+    <th scope="col">Nome do Livro:<a href="alug.php?namela=true" id="nome_table"><img src="imagens/seta_pra_cima.svg" alt="Ordem crescente"></a> 
+      <a href="alug.php?namela=1"><img src="imagens/seta_pra_baixo.svg" alt="Ordem decrescente"></a></th>
+
+    <th scope="col">Nome do Usuário:<a href="alug.php?nameua=true" id="nome_table"><img src="imagens/seta_pra_cima.svg" alt="Ordem crescente"></a> 
+      <a href="alug.php?nameua=1"><img src="imagens/seta_pra_baixo.svg" alt="Ordem decrescente"></a></th>
+      
     <th scope="col">Data de Aluguel:</th>
     <th scope="col">Previsão de Devolução:</th>
     <th scope="col">Status</th>
@@ -113,6 +176,16 @@ $result=$conexao->query($sql);
     ?>
   </tbody>
 </table>
+
+<div id=#pagin>
+    <a href="?pagina=1">Primeira</a>
+    <a href="?pagina=<?=$pagina-1?>"><<</a>
+
+    <?=$pagina?>
+
+    <a href="?pagina=<?=$pagina+1?>">>></a>
+    <a href="?pagina=<?=$paginas?>">Última</a>
+  </div>
 </div>
 </body>
 <script>
