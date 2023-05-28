@@ -2,7 +2,7 @@
 include_once('config.php');
 
 $sql="SELECT*FROM livros ORDER BY id ASC";
-
+//pesquisa->se tiver algo na barra, faz a pesquisa
 if(!empty($_GET['search']))
 {
  $data=$_GET['search'];
@@ -10,7 +10,51 @@ if(!empty($_GET['search']))
   
 }
 else{
- $sql="SELECT*FROM livros ORDER BY id ASC";
+  //se estiver vazia,então mostra todos os registros  
+  //paginação
+  $pagina=1;
+
+  if(isset($_GET['pagina']))
+  $pagina=filter_input(INPUT_GET,"pagina",FILTER_VALIDATE_INT);
+
+  if(!$pagina)
+  $pagina=1;
+
+  $limite=5;
+
+  $inicio=($pagina*$limite)-$limite;
+
+  $registros=0;
+  
+  $registros=$conexao->query("SELECT COUNT(nomel) AS $registros FROM livros");
+
+  $paginas=ceil($registros/$limite);
+
+  $sql="SELECT*FROM livros ORDER BY id LIMIT $inicio,$limite";
+
+}
+
+//ordenar nome  
+if (isset($_GET['namel'])) {
+  $sql="SELECT * FROM livros ORDER BY nomel ASC";
+  $result = $conexao -> query($sql);
+
+  if($_GET['namel']==1){
+    $sql="SELECT * FROM livros ORDER BY nomel DESC";
+    $result = $conexao -> query($sql);
+  }
+}
+
+//ordenar id crescente 
+if (isset($_GET['codl'])) {
+  $sql="SELECT * FROM livros ORDER BY id ASC";
+  $result = $conexao -> query($sql);
+
+  if($_GET['codl']==1){
+    $sql="SELECT * FROM livros ORDER BY id DESC";
+    $result = $conexao -> query($sql);
+  }
+
 }
 
 $result=$conexao->query($sql);
@@ -63,14 +107,22 @@ $result=$conexao->query($sql);
 <table class="table">
   <thead>
     <tr>
-    <th scope="col">#</th>
-    <th scope="col">Nome:</th>
+    <th scope="col">#
+       <a href="livr.php?codl=true" id="nome_table"><img src="imagens/seta_pra_cima.svg" alt="Ordem crescente"></a> 
+      <a href="livr.php?codl=1"><img src="imagens/seta_pra_baixo.svg" alt="Ordem decrescente"></a>
+    </th>
+
+    <th scope="col">Nome 
+      <a href="livr.php?namel=true" id="nome_table"><img src="imagens/seta_pra_cima.svg" alt="Ordem crescente"></a> 
+      <a href="livr.php?namel=1"><img src="imagens/seta_pra_baixo.svg" alt="Ordem decrescente"></a>
+    </th>
     <th scope="col">Autor:</th>
     <th scope="col">Editora:</th>
     <th scope="col">Data de Lançamento:</th>
     <th scope="col">Estoque:</th>
     <th scope="col"><a id="novo" href="livrcad.php"><b>Novo +</b></a></th>
     </tr>
+    
   </thead>
   <tbody>
     <?php
@@ -94,6 +146,17 @@ $result=$conexao->query($sql);
     ?>
   </tbody>
 </table>
+
+<!--pagination-->
+  <div id=#pagin>
+    <a href="?pagina=1">Primeira</a>
+    <a href="?pagina=<?=$pagina-1?>"><<</a>
+
+    <?=$pagina?>
+
+    <a href="?pagina=<?=$pagina+1?>">>></a>
+    <a href="?pagina=<?=$paginas?>">Última</a>
+  </div>
 </div>
 </body>
 <script>
