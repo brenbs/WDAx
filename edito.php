@@ -9,9 +9,53 @@ if(!empty($_GET['search']))
  $sql="SELECT*FROM editoras WHERE id LIKE '%$data%' or nomee LIKE '%$data%' or emaile LIKE '%$data%'  or numeroe LIKE '%$data%' or sitee LIKE '%$data%' ORDER BY id ASC";
 }
 else{
- $sql="SELECT*FROM editoras ORDER BY id ASC";
+  //se estiver vazia,então mostra todos os registros  
+  //paginação
+  $pagina=1;
+
+  if(isset($_GET['pagina']))
+  $pagina=filter_input(INPUT_GET,"pagina",FILTER_VALIDATE_INT);
+
+  if(!$pagina)
+  $pagina=1;
+
+  $limite=5;
+
+  $inicio=($pagina*$limite)-$limite;
+
+  $registros=0;
+  
+  $registros=$conexao->query("SELECT COUNT(nomee) AS $registros FROM editoras");
+
+  $paginas=ceil($registros/$limite);
+
+ 
+
+ $sql="SELECT*FROM editoras ORDER BY id LIMIT $inicio,$limite";
 }
 
+//ordenar nome  
+if (isset($_GET['namee'])) {
+  $sql="SELECT * FROM editoras ORDER BY nomee ASC";
+  $result = $conexao -> query($sql);
+
+  if($_GET['namee']==1){
+    $sql="SELECT * FROM editoras ORDER BY nomee DESC";
+    $result = $conexao -> query($sql);
+  }
+}
+
+//ordenar id crescente 
+if (isset($_GET['code'])) {
+  $sql="SELECT * FROM editoras ORDER BY id ASC";
+  $result = $conexao -> query($sql);
+
+  if($_GET['code']==1){
+    $sql="SELECT * FROM editoras ORDER BY id DESC";
+    $result = $conexao -> query($sql);
+  }
+
+}
 $result=$conexao->query($sql);
 
 ?>
@@ -64,8 +108,11 @@ $result=$conexao->query($sql);
 <table class="table">
   <thead>
     <tr>
-    <th scope="col">#</th>
-    <th scope="col">Nome:</th>
+    <th scope="col"># <a href="edito.php?code=true" id="nome_table"><img src="imagens/seta_pra_cima.svg" alt="Ordem crescente"></a> 
+      <a href="edito.php?code=1"><img src="imagens/seta_pra_baixo.svg" alt="Ordem decrescente"></a></th>
+
+    <th scope="col">Nome: <a href="edito.php?namee=true" id="nome_table"><img src="imagens/seta_pra_cima.svg" alt="Ordem crescente"></a> 
+      <a href="edito.php?namee=1"><img src="imagens/seta_pra_baixo.svg" alt="Ordem decrescente"></a></th>
     <th scope="col">Email:</th>
     <th scope="col">Número:</th>
     <th scope="col">Site:</th>
@@ -94,6 +141,16 @@ $result=$conexao->query($sql);
   </tbody>
 </table>
 
+</table>
+  <div id=#pagin>
+    <a href="?pagina=1">Primeira</a>
+    <a href="?pagina=<?=$pagina-1?>"><<</a>
+
+    <?=$pagina?>
+
+    <a href="?pagina=<?=$pagina+1?>">>></a>
+    <a href="?pagina=<?=$paginas?>">Última</a>
+  </div>
 </div>
 </body>
 <script>
