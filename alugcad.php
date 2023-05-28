@@ -69,15 +69,15 @@ $resultuser_conect = $conexao -> query($sqluser_conect);
 <!--formulario-->
 
 <div class="box">
-  <form action="alugcad.php" method="POST">
+  <form action="alugcad.php" method="POST" id="form">
     <fieldset>
      <legend><b>Cadastro de Usuários</b></legend>
      <br><br>
 
       <div class="inputBox"> 
       <label for="nomela" class="labelInput">Nome do Livro:</label><br>
-        <select name="nomela" id="" value="Livro alugado:" required>
-          <option value="Selecionar">Selecionar</option>
+        <select name="nomela" id="nomela"  class="required" oninput="livroValidate()">
+          <option value="0">Selecionar</option>
             <?php
             
               while($livro_data = mysqli_fetch_assoc($resultlivro_conect)){
@@ -87,14 +87,15 @@ $resultuser_conect = $conexao -> query($sqluser_conect);
               }
             ?>
         </select>
+        <span class="span-required">*Preencha esse campo corretamente !</span>
       </div>
 
     <br>
 
       <div class="inputBox">
       <label for="nomeua" class="labelInput">Nome do Usuário:</label><br>
-        <select name="nomeua" value="Uusário:" required>
-        <option value="Selecionar">Selecionar</option>
+        <select name="nomeua" id="nomeua"  class="required" oninput="nameValidate()">
+        <option value="0">Selecionar</option>
           <?php 
             while($user_data = mysqli_fetch_assoc($resultuser_conect)){
 
@@ -103,19 +104,24 @@ $resultuser_conect = $conexao -> query($sqluser_conect);
             }
           ?>
         </select>
+        <span class="span-required">*Preencha esse campo corretamente !</span>
+
       </div>
       <br><br>
 
       <div class="inputBox">
       <label for="dataalug" class="labelInput">Data de Aluguel:</label>
-      <input type="date" name="dataalug" id="dataalug" class="inputUser" required>
-      </div>
+      <input type="date" name="dataalug" id="dataalug" class="inputUser required" oninput="data1Validate()">
+      <span class="span-required">*Preencha esse campo corretamente !</span>
+    
+     </div>
 
       <br><br>
 
       <div class="inputBox">
       <label for="dataprev" class="labelInput">Previsão de Devolução(<b>Máx. 30 dias</b>):</label>
-      <input type="date" name="dataprev" id="dataprev" class="inputUser" required>
+      <input type="date" name="dataprev" id="dataprev" class="inputUser required"oninput="data2Validate()">
+      <span class="span-required">*Preencha esse campo corretamente !</span>
       </div>
 
      <br><br>
@@ -127,9 +133,85 @@ $resultuser_conect = $conexao -> query($sqluser_conect);
      <br><br>
      
      <input type="submit" name="submit" id="submit">
-    
+     <a href="alug.php">Voltar</a>
     </fieldset>
   </form>
 </div>
+
+<script>
+      //pegando dados
+      var form = document.getElementById('form');
+      var campos = document.querySelectorAll('.required');
+      var spans = document.querySelectorAll('.span-required');
+      var data1 = document.getElementById('dataalug');
+      var data2 = document.getElementById('dataprev');
+      var select_n = document.getElementById('nomeua');
+      var select_l = document.getElementById('nomela');
+      
+      //validação
+      form.addEventListener('submit',(event)=>{
+        if(campos[0].value.length!=0 && campos[1].value.length!=0 && campos[2].value.length!=0 && campos[3].value.length!=0){
+      
+        }else{
+        nameValidate();
+        livroValidate();
+        data1Validate();
+        data2Validate();
+        event.preventDefault();
+        }
+        
+      })
+        
+      //função alert
+      function setError(index){
+        campos[index].style.color = '#e63636'
+        spans[index].style.display ='block'
+      }
+      function removeError(index){
+        campos[index].style.color = ''
+        spans[index].style.display ='none'
+      }
+        //nome
+        function nameValidate(){
+        if(select_n.value==0){
+           setError(0);
+           return;
+        }else{
+         removeError(0);
+        }
+      }
+     
+      //livro
+      function livroValidate(){
+        if(select_l.value==0){
+           setError(1);
+           return;
+        }else{
+         removeError(1);
+        }
+      }
+
+      //data de aluguel
+      function data1Validate(){
+        if(data1.value == ''){
+    		setError(2);
+    		return;
+    	}else{
+        removeError(2);
+      }
+       
+      }
+       //data para devolver
+       function data2Validate(){
+        if(data2.value == ''){
+    		setError(3);
+    		return;
+    	}else{
+        removeError(3);
+      }
+       
+      }
+    </script>
+
 </body>
 </html>
